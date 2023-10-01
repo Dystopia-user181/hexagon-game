@@ -1,5 +1,7 @@
 const websocket = new WebSocket(
-	location.href.includes("127.0.0.1") ? "ws://localhost:8001/" : ""
+	location.href.includes("dystopia") ?
+	"wss://hexagon-game.win" :
+	"ws://localhost:8001/"
 );
 
 const onReceive = {};
