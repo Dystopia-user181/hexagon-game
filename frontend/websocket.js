@@ -1,5 +1,5 @@
 const websocket = new WebSocket(
-	location.href.includes("dystopia") ?
+	location.href.toLowerCase().includes("dystopia") ?
 	"wss://hexagon-game.win" :
 	"ws://localhost:8001/"
 );
