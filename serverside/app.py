@@ -40,19 +40,18 @@ async def handler(websocket):
 			except:
 				error(websocket, "Invalid JSON")
 				continue
-			match message["type"]:
-				case "join":
-					await games.join(id)
-				case "cancel":
-					await games.cancel_join(id)
-				case "play":
-					if users.users[id].game == None:
-						continue
-					try:
-						await games.games[users.users[id].game].attempt_turn(id, message["tile"])
-					except Exception as e:
-						print(e)
-						await error(websocket, "Something went wrong")
+			if message["type"] == "join":
+				await games.join(id)
+			elif message["type"] == "cancel":
+				await games.cancel_join(id)
+			elif message["type"] == "play":
+				if users.users[id].game == None:
+					continue
+				try:
+					await games.games[users.users[id].game].attempt_turn(id, message["tile"])
+				except Exception as e:
+					print(e)
+					await error(websocket, "Something went wrong")
 	finally:
 		games.handle_player_disconnect(id)
 
