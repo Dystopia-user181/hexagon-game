@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hexagon Game</title>
+	<link rel="icon" href="/favicon.png">
+</head>
+<body>
+	<div id="disconnected-tab">
+		<h1>
+			Disconnected
+		</h1>
+		Please refresh to play
+	</div>
+	<div id="titlescreen-tab">
+		<h1>
+			Hexagon Game
+		</h1>
+		<input id="name" placeholder="Enter name">
+		<br>
+		<button id="startplaying-button">Start playing</button>
+	</div>
+	<div id="joingame-tab">
+		<h1>
+			<span id="welcome-message"></span>
+		</h1>
+		<button id="joingame-button">Join a Game</button>
+	</div>
+	<div id="joininggame-tab">
+		<h1>
+			Looking for game...
+		</h1>
+		<button id="cancel-button">Cancel</button>
+	</div>
+	<div id="gameboard-tab">
+		<div id="turn-display">
+			<span id="player1">Player1<span id="player1-you"> (You)</span>: <i id="player1-name"></i></span>
+			<br>
+			<span id="player2">Player2<span id="player2-you"> (You)</span>: <i id="player2-name"></i></span>
+			<br>
+			<span id="player3">Player3<span id="player3-you"> (You)</span>: <i id="player3-name"></i></span>
+			<br>
+			<span id="player4">Player4<span id="player4-you"> (You)</span>: <i id="player4-name"></i></span>
+		</div>
+		<h1 id="winner-text"></h1>
+		<button id="back-button">Back</button>
+		<svg id="gameboard" viewbox="-1.2 -1.2 2.4 2.4" xmlns="http://www.w3.org/2000/svg">
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="-1,0 -0.5,-0.2887 -0.5,-0.866"
+				id="A1"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="-0.5,-0.2887 -0.5,-0.866 -0.25,-0.433"
+				id="A2"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="-0.5,-0.866 -0.25,-0.433 0,-0.5774"
+				id="A3"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="-0.5,-0.866 0,-0.5774 0.5,-0.866"
+				id="A4"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="0.5,-0.866 0.25,-0.433 0,-0.5774"
+				id="A5"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="0.5,-0.2887 0.5,-0.866 0.25,-0.433"
+				id="A6"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="1,0 0.5,-0.2887 0.5,-0.866"
+				id="A7"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="-1,0 -0.5,-0.2887 -0.5,0"
+				id="B1"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="-0.5,-0.2887 -0.5,0 0,0 -0.25,-0.433"
+				id="B2"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="0,0 -0.25,-0.433 0,-0.5774 0.25,-0.433"
+				id="B3"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="0.5,-0.2887 0.5,0 0,0 0.25,-0.433"
+				id="B4"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="1,0 0.5,-0.2887 0.5,0"
+				id="B5"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="-1,0 -0.5,0.2887 -0.5,0"
+				id="C1"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="-0.5,0.2887 -0.5,0 0,0 -0.25,0.433"
+				id="C2"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="0,0 -0.25,0.433 0,0.5774 0.25,0.433"
+				id="C3"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="0.5,0.2887 0.5,0 0,0 0.25,0.433"
+				id="C4"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="1,0 0.5,0.2887 0.5,0"
+				id="C5"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="-1,0 -0.5,0.2887 -0.5,0.866"
+				id="D1"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="-0.5,0.2887 -0.5,0.866 -0.25,0.433"
+				id="D2"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="-0.5,0.866 -0.25,0.433 0,0.5774"
+				id="D3"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="-0.5,0.866 0,0.5774 0.5,0.866"
+				id="D4"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="0.5,0.866 0.25,0.433 0,0.5774"
+				id="D5"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="0.5,0.2887 0.5,0.866 0.25,0.433"
+				id="D6"
+			></polygon>
+			<polygon
+				fill="white" stroke="black" stroke-width="0.01" stroke-linejoin="bevel"
+				points="1,0 0.5,0.2887 0.5,0.866"
+				id="D7"
+			></polygon>
+		</svg>
+	</div>
+</body>
+<style>
+body {
+	margin: 0;
+	overflow: hidden;
+	font-family: Arial;
+	height: 100vh;
+	width: 100vw;
+	font-size: 20px;
+}
+
+h1 {
+	margin-top: 0;
+	text-align: center;
+}
+
+img {
+	vertical-align: middle;
+}
+
+button {
+	border: none;
+	border-radius: 6px;
+	padding: 15px 20px;
+	color: white;
+	background-color: #0280e6;
+	font-size: 25px;
+	cursor: pointer;
+}
+
+input {
+	font-size: 20px;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+button:active {
+	background-color: #4da7f0;
+}
+
+#gameboard {
+	width: 100vw;
+	height: 100vh;
+}
+
+#titlescreen-tab,
+#joingame-tab,
+#joininggame-tab,
+#disconnected-tab {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#turn-display,
+#winner-text,
+#back-button {
+	position: absolute;
+}
+
+#winner-text,
+#back-button {
+	left: 50%;
+    transform: translateX(-50%);
+}
+
+#back-button {
+	bottom: 0;
+}
+</style>
+<script defer type="module" src="game.js"></script>
+</html>
