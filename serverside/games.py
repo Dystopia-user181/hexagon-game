@@ -54,10 +54,11 @@ class Game:
 		return -1
 
 	def next_turn(self):
-		while True:
+		for _ in range(10):
 			self.turn = (self.turn + 1) % 4
 			if self.players[self.turn] in users:
-				break
+				return
+		games.pop(self.id)
 
 	async def attempt_turn(self, player, tile):
 		self._attempt_turn(player, tile)
@@ -142,9 +143,13 @@ async def cancel_join(player_code):
 	}
 	await users[player_code].websocket.send(json.dumps(response))
 
-def handle_player_disconnect(player_code):
+async def handle_player_disconnect(player_code):
 	try_cancel_join(player_code)
 	if users[player_code].game:
-		playerlist = games[users[player_code].game].players
+		game = games[users[player_code].game]
+		playerlist = game.players
+		if game.turn == playerlist.index(player_code):
+			game.next_turn()
 		playerlist[playerlist.index(player_code)] = ""
+		await game.send_updates()
 	users.pop(player_code)

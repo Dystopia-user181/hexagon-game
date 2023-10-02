@@ -25,3 +25,6 @@ export const Websocket = {
 	}
 }
 
+setInterval(() => Websocket.send({ type: "ping" }), 10000)
+
+Websocket.onReceive("pong", () => console.log("pong", new Date()))

@@ -19,13 +19,15 @@ async def handler(websocket):
 
 	"""
 	# Receive and parse the "init" event from the UI.
-	message = await websocket.recv()
-	try:
-		event = json.loads(message)
-	except:
-		print(message)
-		return
-	assert event["type"] == "init"
+	event = { "type": "none" }
+	while event["type"] != "init":
+		message = await websocket.recv()
+		try:
+			event = json.loads(message)
+		except:
+			error(websocket, "Invalid JSON")
+		if event["type"] == "ping":
+			await websocket.send(json.dumps({ "type" : "pong" }))
 	id = users.add_user(event["name"])
 	users.users[id].websocket = websocket
 	response = {
@@ -40,7 +42,9 @@ async def handler(websocket):
 			except:
 				error(websocket, "Invalid JSON")
 				continue
-			if message["type"] == "join":
+			if event["type"] == "ping":
+				await websocket.send(json.dumps({ "type" : "pong" }))
+			elif message["type"] == "join":
 				await games.join(id)
 			elif message["type"] == "cancel":
 				await games.cancel_join(id)
@@ -53,7 +57,7 @@ async def handler(websocket):
 					print(e)
 					await error(websocket, "Something went wrong")
 	finally:
-		games.handle_player_disconnect(id)
+		await games.handle_player_disconnect(id)
 
 async def main():
 	# Set the stop condition when receiving SIGTERM.
